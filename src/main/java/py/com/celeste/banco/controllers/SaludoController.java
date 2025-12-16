@@ -1,4 +1,4 @@
-package py.com.celeste.banco.controller;
+package py.com.celeste.banco.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ public class SaludoController {
         return Map.of("mensaje", "Bienvenido a Banco Celeste, " + nombre);
     }
 
-    @GetMapping("/clientes/{id}")
+    @GetMapping("/old/clientes/{id}")
     public Map<String, Object> obtenerCliente(@PathVariable Long id) {
         return Map.of(
                 "id", id,
@@ -29,7 +29,7 @@ public class SaludoController {
         );
     }
 
-    @GetMapping("/clientes/{id}/estado")
+    @GetMapping("/old/clientes/{id}/estado")
     public ResponseEntity<Map<String, Object>> estadoCliente(@PathVariable Long id) {
 
         if (id <= 0) {
