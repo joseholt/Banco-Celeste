@@ -1,6 +1,7 @@
 package py.com.celeste.banco.services;
 
 import org.springframework.stereotype.Service;
+import py.com.celeste.banco.domain.exceptions.ResourceNotFoundException;
 import py.com.celeste.banco.domain.models.Cliente;
 import py.com.celeste.banco.repositories.ClienteRepository;
 
@@ -26,13 +27,13 @@ public class ClienteService {
     public Cliente buscarPorId(Long id) {
         return clienteRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Cliente no encontrado"));
+                        new ResourceNotFoundException("Cliente no encontrado"));
     }
 
     public Cliente buscarPorEmail(String email) {
         return clienteRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new RuntimeException("Cliente no encontrado"));
+                        new ResourceNotFoundException("Cliente no encontrado"));
     }
 
 }
