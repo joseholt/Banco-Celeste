@@ -1,8 +1,6 @@
 package py.com.celeste.banco.domain.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
 
@@ -14,12 +12,9 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @NotBlank
-    @Email
     @Column(nullable = false, length = 150, unique = true)
     private String email;
 

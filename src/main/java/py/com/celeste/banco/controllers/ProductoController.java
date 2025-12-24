@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import py.com.celeste.banco.domain.models.Producto;
+import py.com.celeste.banco.dto.request.ProductoRequestDTO;
 import py.com.celeste.banco.services.ProductoService;
 
 import java.util.List;
@@ -25,9 +26,9 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ResponseEntity<Producto> guardar(@Valid @RequestBody Producto producto) {
-        Producto guardado = productoService.save(producto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
+    public ResponseEntity<Void> guardar(@Valid @RequestBody ProductoRequestDTO producto) {
+        productoService.save(producto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

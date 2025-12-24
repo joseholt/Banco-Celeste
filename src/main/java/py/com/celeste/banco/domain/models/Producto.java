@@ -1,9 +1,7 @@
 package py.com.celeste.banco.domain.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import py.com.celeste.banco.domain.enums.TipoProducto;
 
 import java.util.Objects;
@@ -16,27 +14,19 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 20)
     @Column(nullable = false, unique = true, length = 20)
     private String codigo;
 
-    @NotBlank
-    @Size(min = 1, max = 100)
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private TipoProducto tipo;
 
-    @NotBlank
-    @Size(min = 3, max = 3)
     @Column(nullable = false, length = 3)
     private String moneda;
 
-    @NotNull
     @Column(nullable = false)
     private Boolean activo;
 

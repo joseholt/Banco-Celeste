@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import py.com.celeste.banco.domain.models.Cliente;
+import py.com.celeste.banco.dto.request.ClienteRequestDTO;
 import py.com.celeste.banco.services.ClienteService;
 
 import java.util.List;
@@ -25,9 +26,9 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> crear(@Valid @RequestBody Cliente cliente) {
-        Cliente guardado = clienteService.guardar(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
+    public ResponseEntity<Void> crear(@Valid @RequestBody ClienteRequestDTO cliente) {
+        clienteService.guardar(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{id}")

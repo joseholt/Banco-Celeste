@@ -3,6 +3,7 @@ package py.com.celeste.banco.services;
 import org.springframework.stereotype.Service;
 import py.com.celeste.banco.domain.exceptions.ResourceNotFoundException;
 import py.com.celeste.banco.domain.models.Cliente;
+import py.com.celeste.banco.dto.request.ClienteRequestDTO;
 import py.com.celeste.banco.repositories.ClienteRepository;
 
 import java.util.List;
@@ -20,7 +21,10 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public Cliente guardar(Cliente cliente) {
+    public Cliente guardar(ClienteRequestDTO dto) {
+        Cliente cliente = new Cliente();
+        cliente.setNombre(dto.getNombre());
+        cliente.setEmail(dto.getEmail());
         return clienteRepository.save(cliente);
     }
 

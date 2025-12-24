@@ -2,6 +2,7 @@ package py.com.celeste.banco.services;
 
 import org.springframework.stereotype.Service;
 import py.com.celeste.banco.domain.models.Producto;
+import py.com.celeste.banco.dto.request.ProductoRequestDTO;
 import py.com.celeste.banco.repositories.ProductoRepository;
 
 import java.util.List;
@@ -15,8 +16,14 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public Producto save(Producto p) {
-        return productoRepository.save(p);
+    public Producto save(ProductoRequestDTO dto) {
+        Producto producto = new Producto();
+        producto.setCodigo(dto.getCodigo());
+        producto.setNombre(dto.getNombre());
+        producto.setTipo(dto.getTipo());
+        producto.setMoneda(dto.getMoneda());
+        producto.setActivo(true);
+        return productoRepository.save(producto);
     }
 
     public List<Producto> findAll() {
