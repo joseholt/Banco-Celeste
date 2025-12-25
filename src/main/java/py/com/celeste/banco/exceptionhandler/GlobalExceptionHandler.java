@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import py.com.celeste.banco.domain.exceptions.BusinessException;
 import py.com.celeste.banco.domain.exceptions.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
@@ -44,6 +45,17 @@ public class GlobalExceptionHandler {
         body.put("errors", errores);
 
         return ResponseEntity.badRequest().body(body);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Object> handleBusinessException(Exception ex) {
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.CONFLICT.value());
+        body.put("error", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
 
     @ExceptionHandler(Exception.class)
